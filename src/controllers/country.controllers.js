@@ -11,3 +11,8 @@ export const getSalesRep = asyncHandler(async (req, res, next) => {
     const salesReps = await countryServices.getSalesRep();
     return res.status(200).json(salesReps);
 });
+
+export const getOptimal = asyncHandler(async (req, res, next) => {
+    const optimalCountries = await countryServices.getOptimal();
+    return res.status(200).json(optimalCountries);
+});

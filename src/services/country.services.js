@@ -44,7 +44,30 @@ const getSalesRep = async () => {
     }
 }
 
+const getOptimal = async () => {
+    try {
+        const response = await fetch(`http://127.0.0.1:${config.PORT}/countries`);
+        const countries = await response.json();
+
+        const regionData = countries.reduce((acc, country) => {
+            acc[country.region] = acc[country.region] || [];
+            acc[country.region].push(country.name);
+            return acc;
+        }, {});
+
+        const result = Object.entries(regionData).map(([region, countryList]) => {
+            const countryCount = countryList.length;
+            return { region, countryList, countryCount };
+        });
+
+        return result;
+    } catch (error) {
+        throw new createHttpError(500, error?.message);
+    }
+}
+
 export const countryServices = {
     getCountry,
-    getSalesRep
+    getSalesRep,
+    getOptimal
 };
