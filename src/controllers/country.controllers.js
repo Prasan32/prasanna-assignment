@@ -6,3 +6,8 @@ export const getCountry = asyncHandler(async (req, res, next) => {
     const countries = await countryServices.getCountry(region);
     return res.status(200).json(countries);
 });
+
+export const getSalesRep = asyncHandler(async (req, res, next) => {
+    const salesReps = await countryServices.getSalesRep();
+    return res.status(200).json(salesReps);
+});
